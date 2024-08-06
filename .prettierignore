@@ -1,0 +1,10 @@
+#mune
+node_modules
+.DS_Store
+dist
+.vscode
+#file
+!.vscode/extensions.json
+components.d.ts
+auto-imports.d.ts
+*.min.*
