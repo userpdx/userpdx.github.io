@@ -28,16 +28,16 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-      - name: Install pnpm globally
-        run: npm install -g pnpm # 全局安装 pnpm
-      - name: Add pnpm to PATH
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | pnpm setup
+      - name: Install pnpm
+        run: |
+          npm install -g pnpm
+          export PATH=$(npm bin -g):$PATH
       - name: Verify pnpm installation
-        run: pnpm --version # 验证 pnpm 是否被正确安装
+        run: pnpm --version
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile # 使用 pnpm 安装依赖
+        run: pnpm install --no-frozen-lockfile
       - name: Build
-        run: pnpm run build # 使用 pnpm 构建项目
+        run: pnpm run build
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
