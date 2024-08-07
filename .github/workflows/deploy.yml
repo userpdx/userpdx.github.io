@@ -28,10 +28,10 @@ jobs:
         with:
           node-version: 20
           cache: 'pnpm'
-      - name: Install pnpm
-        run: |
-          npm install -g pnpm
-          export PATH=$(npm bin -g):$PATH
+      - name: Enable Corepack
+        run: corepack enable
+      - name: Prepare pnpm
+        run: corepack prepare pnpm@latest --activate
       - name: Verify pnpm installation
         run: pnpm --version
       - name: Install dependencies
