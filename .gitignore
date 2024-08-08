@@ -6,5 +6,6 @@ dist
 !.vscode/extensions.json
 components.d.ts
 auto-imports.d.ts
+pnpm-lock.yaml
 
 
