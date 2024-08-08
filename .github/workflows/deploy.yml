@@ -31,11 +31,18 @@ jobs:
       - name: Install pnpm
         run: |
           npm install -g pnpm
-          export PATH="$(npm bin -g):$PATH"
+          echo "::add-path::$(npm bin -g)"
       - name: Verify pnpm installation
         run: pnpm --version
+      - name: Cache pnpm store
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
       - name: Build
         run: pnpm run build
       - name: Setup Pages
